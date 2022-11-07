@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Desafio</title>
+    </head>
+    <body>
+        <h1>Desafio aula 07/11</h1>
+    </body>
+    <script>
+        /*
+                        ## DESAFIO - LÓGICA
+
+                # Fase 1
+                - crie um array dinâmico com três posições [2,1,2]
+                - crie uma iteração que retorne números aleatórios entre 1 e 3
+                 -a cada retorno, altere o valor do array respectivamente
+
+                # Fase 2
+                - utilize as linhas já codificadas e insira em uma função
+                - crie uma verificação que identifica se os números do array são iguais
+                - Se sim: escreva 'Porta 1: aberta'
+                - Se não: escreva 'Tente de novo!'
+
+                # Fase 3
+
+                - crie uma variável de controle para acumular a quantidade de vezes que os números se repetem
+                - crie uma variável que armazene o valor do último sorteio
+                - compare a valor do último sorteio com o valor do sorteio atual
+                -- Se os valores forem iguais: escreva 'Porta (x)' : aberta
+                -- Se os valores forem diferentes:
+                    escreva 'Tente de novo' (Com a exceção do resultado ser de números iguais)
+                        */
+
+        let numerosRepetidos, ac, armazenaUltimo, sorteiosRepetidos, acSorteios
+        let dinamico = [0, 2, 1]
+        let aux = []
+        ac = 0
+        acSorteios = 0
+
+        function sorteioDosNumeros() {
+            let aleatorio = parseInt(Math.random() * 3) + 1
+            dinamico[0] = aleatorio
+
+            let aleatorio1 = parseInt(Math.random() * 3) + 1
+            dinamico[1] = aleatorio1
+
+            let aleatorio2 = parseInt(Math.random() * 3) + 1
+            dinamico[2] = aleatorio2
+
+            //armazena todos os sorteios
+            for (let a = 0; a < dinamico.length; a++) {
+                aux += dinamico[a]
+                
+            }
+            //pega só os últimos 3 números
+            armazenaUltimo = [aux[aux.length - 6],aux[aux.length - 5],aux[aux.length - 4]]
+        }
+
+        //sorteio
+        function sorteio() {
+            sorteioDosNumeros()
+            dinamico.forEach((n, i) => {
+                console.log(`Número ${i + 1}: ${n}`)
+            })
+            if (dinamico[0] == dinamico[1] && dinamico[0] == dinamico[2]) {
+                console.log('Você conseguiu 3 números iguais. Porta 1 aberta')
+                numerosRepetidos = ++ac
+            } else {
+                if (dinamico[0]== armazenaUltimo[0] && dinamico[1]== armazenaUltimo[1] && dinamico[2]== armazenaUltimo[2]) {
+                    console.log(
+                        'Os dois últimos sorteios foram iguais. Porta 1 aberta'
+                    )
+                    sorteiosRepetidos = ++acSorteios
+                } else {
+                    console.log('Tente de novo')
+                }
+            }
+        }
+        //função para repetir sorteio x vezes
+        function repetir() {
+            for (let i = 0; i < 100; i++) {
+                sorteio()
+            }
+            console.log(`Acumulou: ${ac}`)
+            console.log(`Acumulou sorteios seguidos: ${acSorteios}`)
+        }
+    </script>
+</html>
