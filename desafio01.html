@@ -78,13 +78,14 @@
                     console.log('Tente de novo')
                 }
             }
+            console.log(`Acumulou: ${ac}`)
         }
         //função para repetir sorteio x vezes
         function repetir() {
             for (let i = 0; i < 100; i++) {
                 sorteio()
             }
-            console.log(`Acumulou: ${ac}`)
+            console.log(`Acumulou repetições totais: ${ac}`)
             console.log(`Acumulou sorteios seguidos: ${acSorteios}`)
         }
     </script>
