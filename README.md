@@ -2,7 +2,7 @@
 >T-EX - Desafio proposto na aula 07/11
 
 ## Sobre
-- Tente a sorte para conseguir 3 números iguais ou dois sorteios consecutivos iguais para abrir 3 portas. Você terá 10 tentativas!
+Tente a sorte para conseguir 3 números iguais ou dois sorteios consecutivos iguais para abrir 3 portas. 
 
 ## Como instalar
 - Baixe e abra o arquivo HTML em seu navegador WEB
