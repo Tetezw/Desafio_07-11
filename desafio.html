@@ -16,6 +16,7 @@
         somaPontos = 0
         tentativas = 0
         compara = 0
+        let flag = false
 
         function sorteioDosNumeros() {
             //sorteia os números e armazena os sorteios
@@ -47,48 +48,49 @@
 
         //sorteio
         function sorteio() {
-            sorteioDosNumeros()
-            dinamico.forEach((n, i) => {
-                console.log(`- Número ${i + 1}: ${n}`)
-            })
+            if (flag == false) {
+                sorteioDosNumeros()
+                dinamico.forEach((n, i) => {
+                    console.log(`- Número ${i + 1}: ${n}`)
+                })
 
-            if (somaPontos < 3) {
-                numerosRepetidos()
-                if (compara === 2) {
-                    ++somaPontos
-                    console.log(
-                        `Você conseguiu 3 números iguais. \nPorta ${
-                            somaPontos
-                        } aberta.`
-                    )
-                } else {
-                    if (
-                        dinamico[0] == armazenaUltimo[0] &&
-                        dinamico[1] == armazenaUltimo[1] &&
-                        dinamico[2] == armazenaUltimo[2]
-                    ) {
-                        //se os dois últimos sorteios são iguais
+                if (somaPontos < 3) {
+                    numerosRepetidos()
+                    if (compara === 2) {
                         ++somaPontos
                         console.log(
-                            `Os dois últimos sorteios foram iguais.\n Porta ${
-                                somaPontos
-                            } aberta.`
+                            `Você conseguiu 3 números iguais. \nPorta ${somaPontos} aberta.`
                         )
                     } else {
-                        console.log('Tente de novo.')
+                        if (
+                            dinamico[0] == armazenaUltimo[0] &&
+                            dinamico[1] == armazenaUltimo[1] &&
+                            dinamico[2] == armazenaUltimo[2]
+                        ) {
+                            //se os dois últimos sorteios são iguais
+                            ++somaPontos
+                            console.log(
+                                `Os dois últimos sorteios foram iguais.\n Porta ${somaPontos} aberta.`
+                            )
+                        } else {
+                            console.log('Tente de novo.')
+                        }
                     }
                 }
-            }
-            compara = 0 //zera a comparação de números repetidos
+                compara = 0 //zera a comparação de números repetidos
 
-            if (somaPontos === 3) {
-                console.log('►►►►►► Você ganhou! ◄◄◄◄◄◄')
-                console.log(`Você ganhou em ${tentativas} tentativas!`)
-                return
+                if (somaPontos === 3) {
+                    console.log('►►►►►► Você ganhou! ◄◄◄◄◄◄')
+                    console.log(`Tentativas: ${tentativas}`)
+                    return (flag = true)
+                }
+
+                console.log(`Acumulou: ${somaPontos} pontos.`)
+                console.log(`Tentativas: ${tentativas}`)
+                console.log('___________________')
+            } else {
+                return console.log('Atualize a página para jogar novamente.')
             }
-            console.log(`Acumulou: ${somaPontos} pontos`)
-            console.log(`Tentativas: ${tentativas}`)
-            console.log('___________________')
         }
 
         //função para repetir sorteio x vezes
