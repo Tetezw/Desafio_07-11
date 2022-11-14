@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,6 +13,7 @@
         let compara, somaPontos, tentativas
         let dinamico = [0, 0, 0]
         let aux = []
+        let aux2 = [0, 0, 0]
         somaPontos = 0
         tentativas = 0
         compara = 0
@@ -23,16 +24,6 @@
             for (numeros = 0; numeros < 3; numeros++) {
                 dinamico[numeros] = Math.round(Math.random() * 3 + 1)
             }
-            //armazena todos os sorteios
-            for (let a = 0; a < dinamico.length; a++) {
-                aux += dinamico[a]
-            }
-            //pega os penúltimos 3 números
-            armazenaUltimo = [
-                aux[aux.length - 6],
-                aux[aux.length - 5],
-                aux[aux.length - 4],
-            ]
             //soma as tentativas
             tentativas = ++tentativas
         }
@@ -48,35 +39,40 @@
 
         //sorteio
         function sorteio() {
-            if (flag == false) {
+            if (flag == false) { //enquanto não somar 3 pontos, repete flag=false
                 sorteioDosNumeros()
                 dinamico.forEach((n, i) => {
+                    //imprime na tela o sorteio
                     console.log(`- Número ${i + 1}: ${n}`)
                 })
 
+                //armazena os dois últimos sorteios
+                for (const n in dinamico) {
+                    aux[n] = aux2[n]
+                    aux2[n] = dinamico[n]
+                }
+
                 if (somaPontos < 3) {
                     numerosRepetidos()
-                    if (compara === 2) {
+                    if (compara === 2) { //se entre as posições 0,1 e 1,2 forem iguais, todos os números são iguais
                         ++somaPontos
                         console.log(
                             `Você conseguiu 3 números iguais. \nPorta ${somaPontos} aberta.`
                         )
                     } else {
-                        if (
-                            dinamico[0] == armazenaUltimo[0] &&
-                            dinamico[1] == armazenaUltimo[1] &&
-                            dinamico[2] == armazenaUltimo[2]
-                        ) {
-                            //se os dois últimos sorteios são iguais
+                        if (JSON.stringify(aux) === JSON.stringify(dinamico)) {
+                            //compara se os dois últimos sorteios são iguais
                             ++somaPontos
                             console.log(
                                 `Os dois últimos sorteios foram iguais.\n Porta ${somaPontos} aberta.`
                             )
+
                         } else {
                             console.log('Tente de novo.')
                         }
                     }
                 }
+
                 compara = 0 //zera a comparação de números repetidos
 
                 if (somaPontos === 3) {
@@ -88,7 +84,7 @@
                 console.log(`Acumulou: ${somaPontos} pontos.`)
                 console.log(`Tentativas: ${tentativas}`)
                 console.log('___________________')
-            } else {
+            } else { //quando somar 3 pontos (flag=true) para de rodar o código
                 return console.log('Atualize a página para jogar novamente.')
             }
         }
@@ -99,8 +95,6 @@
                 sorteio()
                 if (somaPontos === 3) return
             }
-            //console.log(`Acumulou repetições totais: ${ac}`)
-            //console.log(`Acumulou sorteios seguidos: ${acSorteios}`)
         }
     </script>
 </html>
